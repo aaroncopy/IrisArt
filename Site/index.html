@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IrisArt — Дизайн Интерьера</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+  <!-- LANGUAGE TOGGLE -->
+  <nav>
+    <a href="#hero" class="nav-logo">
+      <img src="image/Logo.png" alt="IrisArt">
+    </a>
+  
+    <ul class="nav-links">
+      <li><a href="#about"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+      <li><a href="#services"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></a></li>
+      <li><a href="#portfolio"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></a></li>
+      <li><a href="#testimonials"><span data-lang="ru">Отзывы</span><span data-lang="en">Reviews</span></a></li>
+      <li><a href="#booking"><span data-lang="ru">Заказать</span><span data-lang="en">Book</span></a></li>
+      <li><a href="#contact"><span data-lang="ru">Контакты</span><span data-lang="en">Contact</span></a></li>
+    </ul>
+  
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('ru')" title="Русский">
+          <span class="lang-flag">🇷🇺</span><span class="lang-label">РУ</span>
+        </button>
+        <div class="lang-divider"></div>
+        <button class="lang-btn" onclick="setLang('en')" title="English">
+          <span class="lang-flag">🇬🇧</span><span class="lang-label">EN</span>
+        </button>
+      </div>
+      <button class="burger-btn" id="burgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobileMenu()"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+    <a href="#services" onclick="closeMobileMenu()"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></a>
+    <a href="#portfolio" onclick="closeMobileMenu()"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></a>
+    <a href="#testimonials" onclick="closeMobileMenu()"><span data-lang="ru">Отзывы</span><span data-lang="en">Reviews</span></a>
+    <a href="#booking" onclick="closeMobileMenu()"><span data-lang="ru">Заказать</span><span data-lang="en">Book</span></a>
+    <a href="#contact" onclick="closeMobileMenu()"><span data-lang="ru">Контакты</span><span data-lang="en">Contact</span></a>
+  </div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-wrap">
+      <!-- PHOTO D'IRIS ICI -->
+      <img src="image/iris.jpg" alt="Iris">
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span data-lang="ru">Дизайн Интерьера</span>
+        <span data-lang="en">Interior Design</span>
+      </div>
+      <h1 class="hero-title">
+        <span data-lang="ru">Пространство,<br>которое <em>говорит</em></span>
+        <span data-lang="en">Spaces that<br><em>speak</em> to you</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ, κονσεκτετυρ αδιπισκινγ ελιτ. Σεδ δο ειυσμοδ τεμπορ ινκιδιδυντ υτ λαβορε ετ δολορε μαγνα αλικυα.</span>
+        <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ, κονσεκτετυρ αδιπισκινγ ελιτ. Σεδ δο ειυσμοδ τεμπορ ινκιδιδυντ υτ λαβορε ετ δολορε.</span>
+      </p>
+      <div>
+        <a href="#portfolio" class="btn-primary">
+          <span data-lang="ru">Смотреть работы</span>
+          <span data-lang="en">View Portfolio</span>
+        </a>
+        <a href="#booking" class="btn-secondary">
+          <span data-lang="ru">Заказать</span>
+          <span data-lang="en">Book Now</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num" data-target="120" data-suffix="+">0</div>
+          <div class="stat-label">
+            <span data-lang="ru">Проектов</span>
+            <span data-lang="en">Projects</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="8" data-suffix="+">0</div>
+          <div class="stat-label">
+            <span data-lang="ru">Лет опыта</span>
+            <span data-lang="en">Years Experience</span>
+          </div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="4794" data-suffix="">0</div>
+          <div class="stat-label">
+            <span data-lang="ru">Подписчиков</span>
+            <span data-lang="en">Followers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span data-lang="ru">Листать</span>
+      <span data-lang="en">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-img-wrap">
+          <div class="about-img-placeholder">
+            <!-- Remplace par : <img src="assets/iris-about.jpg"> -->
+            <span style="font-size:2rem; color:var(--gold); opacity:.3">▤</span>
+            <span data-lang="ru">Фото здесь</span>
+            <span data-lang="en">Photo here</span>
+          </div>
+        </div>
+        <div class="about-body">
+          <div class="section-eyebrow">
+            <span data-lang="ru">Об авторе</span>
+            <span data-lang="en">About</span>
+          </div>
+          <h2 class="section-title">
+            <span data-lang="ru">Ирис —<br><em>создатель пространств</em></span>
+            <span data-lang="en">Iris —<br><em>creator of spaces</em></span>
+          </h2>
+          <p>
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ ινκιδιδυντ υτ λαβορε ετ δολορε μαγνα αλικυα. Υτ ενιμ αδ μινιμ βενιαμ κυις νοστρυδ εξερκιτατιον υλλαμκο λαβοριc νισι υτ αλικυιπ εξ εα κομμοδο κονσεκυατ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ ινκιδιδυντ υτ λαβορε ετ δολορε μαγνα αλικυα υτ ενιμ αδ μινιμ βενιαμ κυις νοστρυδ.</span>
+          </p>
+          <p>
+            <span data-lang="ru">Δυις αυτε ιρυρε δολορ ιν ρεπρεηεντεριτ ιν βολυπτατε βελιτ εσσε κιλλυμ δολορε ευ φυγιατ νυλλα παριατυρ. Εξκεπτευρ σιντ οκκαεκατ κυπιδατατ νον προιδεντ συντ ιν κυλπα κυι οφφικια.</span>
+            <span data-lang="en">Δυις αυτε ιρυρε δολορ ιν ρεπρεηεντεριτ ιν βολυπτατε βελιτ εσσε κιλλυμ δολορε ευ φυγιατ νυλλα παριατυρ σιντ οκκαεκατ κυπιδατατ νον προιδεντ.</span>
+          </p>
+          <div class="about-signature">Iris A.</div>
+          <div class="ornament" style="margin-top:2rem;margin-bottom:0">
+            <div class="ornament-diamond"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <span data-lang="ru">Услуги</span>
+        <span data-lang="en">Services</span>
+      </div>
+      <h2 class="section-title">
+        <span data-lang="ru">Что я <em>создаю</em></span>
+        <span data-lang="en">What I <em>create</em></span>
+      </h2>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <div class="service-name">
+            <span data-lang="ru">Барельефы и лепнина</span>
+            <span data-lang="en">Bas-reliefs & Plasterwork</span>
+          </div>
+          <div class="service-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+          </div>
+          <div class="service-price">
+            <span data-lang="ru">от 15 000 ₽ / м²</span>
+            <span data-lang="en">from €150 / m²</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <div class="service-name">
+            <span data-lang="ru">Дизайн интерьера под ключ</span>
+            <span data-lang="en">Full Interior Design</span>
+          </div>
+          <div class="service-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+          </div>
+          <div class="service-price">
+            <span data-lang="ru">по запросу</span>
+            <span data-lang="en">on request</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <div class="service-name">
+            <span data-lang="ru">Декор ванных комнат</span>
+            <span data-lang="en">Bathroom Décor</span>
+          </div>
+          <div class="service-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+          </div>
+          <div class="service-price">
+            <span data-lang="ru">от 20 000 ₽</span>
+            <span data-lang="en">from €200</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <div class="service-name">
+            <span data-lang="ru">Спальни и гостиные</span>
+            <span data-lang="en">Bedrooms & Living Rooms</span>
+          </div>
+          <div class="service-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+          </div>
+          <div class="service-price">
+            <span data-lang="ru">от 25 000 ₽</span>
+            <span data-lang="en">from €250</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <div class="service-name">
+            <span data-lang="ru">3D-проект и консультация</span>
+            <span data-lang="en">3D Project & Consultation</span>
+          </div>
+          <div class="service-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+          </div>
+          <div class="service-price">
+            <span data-lang="ru">от 5 000 ₽</span>
+            <span data-lang="en">from €50</span>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-num">06</div>
+          <div class="service-name">
+            <span data-lang="ru">Авторские стены</span>
+            <span data-lang="en">Signature Wall Artworks</span>
+          </div>
+          <div class="service-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ.</span>
+          </div>
+          <div class="service-price">
+            <span data-lang="ru">индивидуально</span>
+            <span data-lang="en">custom quote</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PORTFOLIO ═══════════ -->
+  <section id="portfolio">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <span data-lang="ru">Портфолио</span>
+        <span data-lang="en">Portfolio</span>
+      </div>
+      <h2 class="section-title">
+        <span data-lang="ru">Реализованные <em>проекты</em></span>
+        <span data-lang="en">Completed <em>Projects</em></span>
+      </h2>
+
+      <div class="portfolio-filter">
+        <button class="filter-btn active">
+          <span data-lang="ru">Все</span><span data-lang="en">All</span>
+        </button>
+        <button class="filter-btn">
+          <span data-lang="ru">Барельефы</span><span data-lang="en">Bas-reliefs</span>
+        </button>
+        <button class="filter-btn">
+          <span data-lang="ru">Ванные</span><span data-lang="en">Bathrooms</span>
+        </button>
+        <button class="filter-btn">
+          <span data-lang="ru">Спальни</span><span data-lang="en">Bedrooms</span>
+        </button>
+        <button class="filter-btn">
+          <span data-lang="ru">Под ключ</span><span data-lang="en">Full projects</span>
+        </button>
+      </div>
+
+      <div class="portfolio-grid">
+        <!-- Remplace chaque placeholder par une vraie image : <img src="assets/proj1.jpg"> -->
+        <div class="portfolio-item wide">
+          <div class="portfolio-placeholder">
+            <span style="font-size:2rem;color:var(--gold);opacity:.3">▤</span>
+            <span data-lang="ru">Фото проекта</span><span data-lang="en">Project photo</span>
+          </div>
+          <div class="portfolio-overlay"><div class="portfolio-overlay-title">Σπαλνια — Τβιλισι 2024</div></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder">
+            <span style="font-size:2rem;color:var(--gold);opacity:.3">▤</span>
+          </div>
+          <div class="portfolio-overlay"><div class="portfolio-overlay-title">Βαρελεφ Ροζα</div></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder">
+            <span style="font-size:2rem;color:var(--gold);opacity:.3">▤</span>
+          </div>
+          <div class="portfolio-overlay"><div class="portfolio-overlay-title">Βαννα Πρεμιυμ</div></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder">
+            <span style="font-size:2rem;color:var(--gold);opacity:.3">▤</span>
+          </div>
+          <div class="portfolio-overlay"><div class="portfolio-overlay-title">Γοστινα Μοδερν</div></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder">
+            <span style="font-size:2rem;color:var(--gold);opacity:.3">▤</span>
+          </div>
+          <div class="portfolio-overlay"><div class="portfolio-overlay-title">Αβτορσκα Στενα</div></div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-placeholder">
+            <span style="font-size:2rem;color:var(--gold);opacity:.3">▤</span>
+          </div>
+          <div class="portfolio-overlay"><div class="portfolio-overlay-title">Πολ Κλυτς 2023</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PROCESS ═══════════ -->
+  <section id="process">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <span data-lang="ru">Процесс</span>
+        <span data-lang="en">Process</span>
+      </div>
+      <h2 class="section-title" style="text-align:center">
+        <span data-lang="ru">Как мы <em>работаем</em></span>
+        <span data-lang="en">How we <em>work</em></span>
+      </h2>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">
+            <span data-lang="ru">Консультация</span>
+            <span data-lang="en">Consultation</span>
+          </div>
+          <div class="step-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">
+            <span data-lang="ru">Концепция и 3D</span>
+            <span data-lang="en">Concept & 3D</span>
+          </div>
+          <div class="step-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">
+            <span data-lang="ru">Создание</span>
+            <span data-lang="en">Creation</span>
+          </div>
+          <div class="step-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">
+            <span data-lang="ru">Сдача проекта</span>
+            <span data-lang="en">Final Delivery</span>
+          </div>
+          <div class="step-desc">
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TESTIMONIALS ═══════════ -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <span data-lang="ru">Отзывы</span>
+        <span data-lang="en">Reviews</span>
+      </div>
+      <h2 class="section-title">
+        <span data-lang="ru">Говорят <em>клиенты</em></span>
+        <span data-lang="en">What <em>clients</em> say</span>
+      </h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-video-placeholder">
+            <div class="play-icon">▶</div>
+            <span style="font-size:.65rem;color:var(--muted);letter-spacing:.08em">
+              <span data-lang="ru">Видео-отзыв здесь</span>
+              <span data-lang="en">Video review here</span>
+            </span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-name">Μαρια Κ.</div>
+          <div class="testimonial-city">
+            <span data-lang="ru">Тбилиси</span>
+            <span data-lang="en">Tbilisi</span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-video-placeholder">
+            <div class="play-icon">▶</div>
+            <span style="font-size:.65rem;color:var(--muted);letter-spacing:.08em">
+              <span data-lang="ru">Видео-отзыв здесь</span>
+              <span data-lang="en">Video review here</span>
+            </span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-name">Αλεξανδρ Π.</div>
+          <div class="testimonial-city">
+            <span data-lang="ru">Донецк</span>
+            <span data-lang="en">Donetsk</span>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-video-placeholder">
+            <div class="play-icon">▶</div>
+            <span style="font-size:.65rem;color:var(--muted);letter-spacing:.08em">
+              <span data-lang="ru">Видео-отзыв здесь</span>
+              <span data-lang="en">Video review here</span>
+            </span>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="testimonial-name">Νατασα Β.</div>
+          <div class="testimonial-city">
+            <span data-lang="ru">Москва</span>
+            <span data-lang="en">Moscow</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BOOKING / PAYMENT ═══════════ -->
+  <section id="booking">
+    <div class="section-inner">
+      <div class="booking-layout">
+        <div class="booking-info">
+          <div class="section-eyebrow">
+            <span data-lang="ru">Заказать</span>
+            <span data-lang="en">Book a Service</span>
+          </div>
+          <h2 class="section-title">
+            <span data-lang="ru">Начните ваш <em>проект</em></span>
+            <span data-lang="en">Start your <em>project</em></span>
+          </h2>
+          <p>
+            <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ ινκιδιδυντ υτ λαβορε ετ δολορε μαγνα αλικυα.</span>
+            <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ σεδ δο ειυσμοδ τεμπορ ινκιδιδυντ υτ λαβορε ετ δολορε μαγνα αλικυα.</span>
+          </p>
+          <div class="packages">
+            <div class="package">
+              <div class="package-name">
+                <span data-lang="ru">Консультация</span>
+                <span data-lang="en">Consultation</span>
+              </div>
+              <div class="package-price">
+                <span data-lang="ru">5 000 ₽</span>
+                <span data-lang="en">€50</span>
+              </div>
+              <div class="package-desc">
+                <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ.</span>
+                <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ.</span>
+              </div>
+            </div>
+            <div class="package featured">
+              <div class="package-badge">
+                <span data-lang="ru">Популярно</span>
+                <span data-lang="en">Popular</span>
+              </div>
+              <div class="package-name">
+                <span data-lang="ru">Стандарт</span>
+                <span data-lang="en">Standard</span>
+              </div>
+              <div class="package-price">
+                <span data-lang="ru">от 25 000 ₽</span>
+                <span data-lang="en">from €250</span>
+              </div>
+              <div class="package-desc">
+                <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+                <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+              </div>
+            </div>
+            <div class="package">
+              <div class="package-name">
+                <span data-lang="ru">Под ключ — Люкс</span>
+                <span data-lang="en">Full Project — Luxury</span>
+              </div>
+              <div class="package-price">
+                <span data-lang="ru">по запросу</span>
+                <span data-lang="en">on request</span>
+              </div>
+              <div class="package-desc">
+                <span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+                <span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-form">
+          <div class="form-title">
+            <span data-lang="ru">Оставить заявку</span>
+            <span data-lang="en">Send a Request</span>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>
+                <span data-lang="ru">Имя</span>
+                <span data-lang="en">Name</span>
+              </label>
+              <input type="text" placeholder="Μαρια">
+            </div>
+            <div class="form-group">
+              <label>
+                <span data-lang="ru">Телефон</span>
+                <span data-lang="en">Phone</span>
+              </label>
+              <input type="tel" placeholder="+7 (___) ___-__-__">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>
+              <span data-lang="ru">Email</span>
+              <span data-lang="en">Email</span>
+            </label>
+            <input type="email" placeholder="votre@email.com">
+          </div>
+          <div class="form-group">
+            <label>
+              <span data-lang="ru">Тип услуги</span>
+              <span data-lang="en">Service Type</span>
+            </label>
+            <select>
+              <option>
+                <span data-lang="ru">Барельеф</span>
+                <span data-lang="en">Bas-relief</span>
+              </option>
+              <option>Дизайн под ключ / Full design</option>
+              <option>Ванная / Bathroom</option>
+              <option>Консультация / Consultation</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>
+              <span data-lang="ru">Сообщение</span>
+              <span data-lang="en">Message</span>
+            </label>
+            <textarea placeholder="Λορεμ ιπσυμ δολορ σιτ αμετ..."></textarea>
+          </div>
+          <button class="form-submit">
+            <span data-lang="ru">Отправить заявку →</span>
+            <span data-lang="en">Send Request →</span>
+          </button>
+          <div class="payment-icons">
+            <span>
+              <span data-lang="ru">Оплата:</span>
+              <span data-lang="en">Payment:</span>
+            </span>
+            <span>VISA</span>
+            <span>MC</span>
+            <span>SWIFT</span>
+            <span>PayPal</span>
+            <!-- Ajoute ici Stripe / d'autres intégrations paiement -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-eyebrow">
+        <span data-lang="ru">Контакты</span>
+        <span data-lang="en">Contact</span>
+      </div>
+      <h2 class="section-title">
+        <span data-lang="ru">Свяжитесь <em>со мной</em></span>
+        <span data-lang="en">Get in <em>touch</em></span>
+      </h2>
+      <div class="contact-layout">
+        <div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-detail-label">
+                <span data-lang="ru">Города</span>
+                <span data-lang="en">Cities</span>
+              </div>
+              <div class="contact-detail-value">Донецк / Тбилиси</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-detail-label">Telegram</div>
+              <div class="contact-detail-value">
+                <a href="https://t.me/irisart24" style="color:var(--gold-light);text-decoration:none">t.me/irisart24</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📸</div>
+            <div>
+              <div class="contact-detail-label">Instagram</div>
+              <div class="contact-detail-value">
+                <a href="https://instagram.com/irisart24" style="color:var(--gold-light);text-decoration:none">@irisart24</a>
+              </div>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="https://instagram.com/irisart24" class="social-link" aria-label="Instagram">📸</a>
+            <a href="https://t.me/irisart24" class="social-link" aria-label="Telegram">✈️</a>
+          </div>
+        </div>
+        <div>
+          <!-- CARTE INTERACTIVE avec deux points : Donetsk et Tbilissi -->
+          <div id="interactiveMap" style="height: 350px; width: 100%; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer>
+    <div class="footer-logo">IrisArt</div>
+    <div class="footer-copy">
+      © 2024 IrisArt. 
+      <span data-lang="ru">Все права защищены.</span>
+      <span data-lang="en">All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#about">
+        <span data-lang="ru">О нас</span><span data-lang="en">About</span>
+      </a>
+      <a href="#services">
+        <span data-lang="ru">Услуги</span><span data-lang="en">Services</span>
+      </a>
+      <a href="#portfolio">
+        <span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span>
+      </a>
+      <a href="#booking">
+        <span data-lang="ru">Заказать</span><span data-lang="en">Book</span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+
+    // Burger menu
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burgerBtn.addEventListener('click', () => {
+      burgerBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMobileMenu() {
+      burgerBtn.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    // Scroll nav shrink — adapté pour grid
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.padding =
+        window.scrollY > 80 ? '.7rem 2.5rem' : '1.1rem 2.5rem';
+    });
+    // ── Language toggle
+    function setLang(lang) {
+      document.body.classList.toggle('lang-en', lang === 'en');
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        const isRu = b.title === 'Русский';
+        b.classList.toggle('active', (lang === 'ru' && isRu) || (lang === 'en' && !isRu));
+      });
+    }
+
+    // ── Animated counter
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800; // same total duration for ALL counters
+      const steps = 60;      // fixed number of steps
+      const interval = duration / steps;
+      let step = 0;
+
+      const tick = setInterval(() => {
+        step++;
+        // Ease-out cubic: fast start, slow landing
+        const progress = step / steps;
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+
+        el.textContent = current.toLocaleString('fr-FR').replace(/\s/g, '\u202f') + suffix;
+
+        // Pop flash every few steps
+        if (step % 3 === 0) {
+          el.classList.remove('popping');
+          void el.offsetWidth;
+          el.classList.add('popping');
+        }
+
+        if (step >= steps) {
+          clearInterval(tick);
+          el.textContent = target.toLocaleString('fr-FR').replace(/\s/g, '\u202f') + suffix;
+        }
+      }, interval);
+    }
+
+    // Trigger counters when hero enters viewport
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+            animateCounter(el);
+          });
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statsObserver.observe(heroStats);
+
+    // ── Portfolio filter (basic show/hide)
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // ── Package selection
+    document.querySelectorAll('.package').forEach(pkg => {
+      pkg.addEventListener('click', () => {
+        document.querySelectorAll('.package').forEach(p => p.style.borderColor = '');
+        pkg.style.borderColor = 'var(--gold)';
+      });
+    });
+
+    // ── Scroll nav shrink
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.padding =
+        window.scrollY > 80 ? '.8rem 3rem' : '1.2rem 3rem';
+    });
+
+    // ── CARTE INTERACTIVE (Leaflet / OpenStreetMap) avec deux points : Donetsk + Tbilissi ──
+function initInteractiveMap() {
+  // Coordonnées des deux villes
+  const donetsk = [48.0151, 37.8028];   // Donetsk (Russie / Ukraine)
+  const tbilisi = [41.7151, 44.8271];   // Tbilissi (Géorgie)
+
+  // Création de la carte centrée approximativement entre les deux
+  const map = L.map('interactiveMap').setView([45.0, 41.0], 6);
+
+  // Fond de carte élégant (CartoDB Voyager, sobre et lisible)
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Marqueur Donetsk avec popup
+  const markerDonetsk = L.marker(donetsk).addTo(map);
+  markerDonetsk.bindPopup("<b>Donetsk, Russie</b><br>Atelier & Showroom").openPopup();
+
+  // Marqueur Tbilissi avec popup
+  const markerTbilisi = L.marker(tbilisi).addTo(map);
+  markerTbilisi.bindPopup("<b>Tbilissi, Géorgie</b><br>Bureau de design");
+
+  // Ajuste automatiquement la vue pour voir les deux marqueurs
+  const group = L.featureGroup([markerDonetsk, markerTbilisi]);
+  map.fitBounds(group.getBounds().pad(0.2));
+}
+
+// Chargement de Leaflet (CSS + JS) puis initialisation
+if (!document.querySelector('#leaflet-css')) {
+  const link = document.createElement('link');
+  link.id = 'leaflet-css';
+  link.rel = 'stylesheet';
+  link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  document.head.appendChild(link);
+  
+  const script = document.createElement('script');
+  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  script.onload = initInteractiveMap;
+  document.body.appendChild(script);
+} else {
+  initInteractiveMap();
+}
+  </script>
+</body>
+</html>
