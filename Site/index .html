@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IrisArt — Дизайн Интерьера</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" />
+
+  <!-- ✅ portfolioData déclaré AVANT tout le reste de la page -->
+  <script>var portfolioData = [];</script>
+
+  <style>
+    [data-lang="en"] { display: none; }
+    [data-lang="ru"] { display: inline; }
+    body.lang-en [data-lang="en"] { display: inline; }
+    body.lang-en [data-lang="ru"] { display: none; }
+    body.lang-ru [data-lang="ru"] { display: inline; }
+    body.lang-ru [data-lang="en"] { display: none; }
+
+    .portfolio-item { cursor: pointer; overflow: hidden; position: relative; }
+
+    /* Image de couverture */
+    .portfolio-item > img.cover {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transition: transform .5s ease;
+    }
+    .portfolio-item:hover > img.cover { transform: scale(1.05); }
+
+    /* Overlay — z-index 1, pointer-events none pour ne pas bloquer le clic */
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(10,14,26,.9) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity .4s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      pointer-events: none;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-overlay-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: #f8f5ee;
+    }
+    .portfolio-overlay-hint {
+      display: flex; align-items: center; gap: 5px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .65rem; letter-spacing: .15em;
+      color: rgba(197,160,80,.8);
+      margin-top: .5rem;
+      text-transform: uppercase;
+    }
+
+    /* Lightbox — z-index très élevé */
+    #lightbox { display: none; }
+    #lightbox.open { display: flex !important; }
+    #lb-media img { max-width: 100%; max-height: 78vh; object-fit: contain; border-radius: 4px; }
+    #lb-media video { max-width: 100%; max-height: 78vh; border-radius: 4px; }
+    .lb-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(197,160,80,.3); border: 1px solid rgba(197,160,80,.5); cursor: pointer; transition: background .2s; }
+    .lb-dot.active { background: #c5a050; }
+    #lb-prev:hover, #lb-next:hover { background: rgba(197,160,80,.15) !important; border-color: #c5a050 !important; }
+
+    /* Story.png toujours visible */
+    .about-img-placeholder { overflow: hidden; }
+    .about-img-placeholder img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .contact-icon {
+      display: flex !important; align-items: center; justify-content: center;
+      width: 44px; height: 44px; min-width: 44px;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg, rgba(197,160,80,0.15), rgba(197,160,80,0.05)) !important;
+      border: 1px solid rgba(197,160,80,0.4) !important;
+      color: #c5a050;
+      box-shadow: 0 0 12px rgba(197,160,80,0.1) !important;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo"><img src="image/Logo.png" alt="IrisArt"></a>
+    <ul class="nav-links">
+      <li><a href="#about"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a></li>
+      <li><a href="#services"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></a></li>
+      <li><a href="#portfolio"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></a></li>
+      <li><a href="#booking"><span data-lang="ru">Заказать</span><span data-lang="en">Book</span></a></li>
+      <li><a href="#contact"><span data-lang="ru">Контакты</span><span data-lang="en">Contact</span></a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('ru')" title="Русский"><span class="lang-flag">🇷🇺</span><span class="lang-label">РУ</span></button>
+        <div class="lang-divider"></div>
+        <button class="lang-btn" onclick="setLang('en')" title="English"><span class="lang-flag">🇬🇧</span><span class="lang-label">EN</span></button>
+      </div>
+      <button class="burger-btn" id="burgerBtn"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobileMenu()"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+    <a href="#services" onclick="closeMobileMenu()"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></a>
+    <a href="#portfolio" onclick="closeMobileMenu()"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></a>
+    <a href="#booking" onclick="closeMobileMenu()"><span data-lang="ru">Заказать</span><span data-lang="en">Book</span></a>
+    <a href="#contact" onclick="closeMobileMenu()"><span data-lang="ru">Контакты</span><span data-lang="en">Contact</span></a>
+  </div>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-wrap"><img src="image/iris.jpg" alt="Irina"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span data-lang="ru">Дизайн Интерьера</span><span data-lang="en">Interior Design</span></div>
+      <h1 class="hero-title">
+        <span data-lang="ru">Пространство,<br>которое <em>говорит с тобой</em></span>
+        <span data-lang="en">Spaces that<br><em>speak</em> to you</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span data-lang="ru">Барельефы и декор, которые превращают дом в дизайнерское пространство. Настолько впечатляют, что гости останавливаются и спрашивают: «Где вы это купили?»</span>
+        <span data-lang="en">Bas-reliefs and decorative walls that turn your home into a designer space. So striking that guests stop in their tracks and ask, "Where did you get that?"</span>
+      </p>
+      <div>
+        <a href="#portfolio" class="btn-primary"><span data-lang="ru">Смотреть работы</span><span data-lang="en">View Portfolio</span></a>
+        <a href="#booking" class="btn-secondary"><span data-lang="ru">Заказать</span><span data-lang="en">Book Now</span></a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num" data-target="124" data-suffix="+">0</div><div class="stat-label"><span data-lang="ru">Проектов</span><span data-lang="en">Projects</span></div></div>
+        <div><div class="stat-num" data-target="12" data-suffix="+">0</div><div class="stat-label"><span data-lang="ru">Лет опыта</span><span data-lang="en">Years Experience</span></div></div>
+        <div><div class="stat-num" data-target="4794" data-suffix="">0</div><div class="stat-label"><span data-lang="ru">Подписчиков</span><span data-lang="en">Followers</span></div></div>
+      </div>
+    </div>
+    <div class="scroll-hint"><div class="scroll-line"></div><span data-lang="ru">Листать</span><span data-lang="en">Scroll</span></div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-img-wrap">
+          <!-- ✅ Story.png toujours visible, sans condition de langue -->
+          <div class="about-img-placeholder">
+            <img src="image/Story.png" alt="Irina Story">
+          </div>
+        </div>
+        <div class="about-body">
+          <div class="section-eyebrow"><span data-lang="ru">Об авторе</span><span data-lang="en">About</span></div>
+          <h2 class="section-title">
+            <span data-lang="ru">Ирина —<br><em>Делаю пространство живым</em></span>
+            <span data-lang="en">Irina —<br><em>bringing spaces to life</em></span>
+          </h2>
+          <p>
+            <span data-lang="ru">Уже более 12 лет я создаю барельефы, которые вызывают такое же сильное впечатление, как и остаются в памяти. Животные, цветы, пейзажи… У моих работ есть только одна цель… оживить ваш интерьер и произвести эффект «вау» с самого первого визита.</span>
+            <span data-lang="en">For over 12 years, I've been designing and creating bas-reliefs that are as impressive as they are memorable. Animals, flowers, landscapes… My pieces have just one goal… to bring your interior to life and create that "wow" effect from the very first visit.</span>
+          </p>
+          <p>
+            <span data-lang="ru">Отели, рестораны, квартиры и дома. Я сопровождаю вас от идеи до полной реализации проекта. Превратите свою обычную квартиру в интерьер, словно сошедший со страниц дизайнерского журнала! Посмотрите мои работы прямо здесь.</span>
+            <span data-lang="en">Hotels, restaurants, apartments, and homes. I'll guide you from the initial concept through to the project's completion. Transform your ordinary apartment into an interior straight out of a design magazine! Discover my work right below.</span>
+          </p>
+          <div class="about-signature">Irina A.</div>
+          <div class="ornament" style="margin-top:2rem;margin-bottom:0"><div class="ornament-diamond"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-eyebrow"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></div>
+      <h2 class="section-title"><span data-lang="ru">Что я <em>создаю</em></span><span data-lang="en">What I <em>create</em></span></h2>
+      <div class="services-grid">
+        <div class="service-card"><div class="service-num">01</div><div class="service-name"><span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span></div><div class="service-desc"><span data-lang="ru">Больше, чем просто украшение — скульптурная глубина, которая превращает ваши стены в центральный элемент интерьера.</span><span data-lang="en">More than decoration — sculpted depth that transforms your walls into a focal point.</span></div><div class="service-price"><span data-lang="ru">от 15 000 ₽ / м²</span><span data-lang="en">from €150 / m²</span></div></div>
+        <div class="service-card"><div class="service-num">02</div><div class="service-name"><span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span></div><div class="service-desc"><span data-lang="ru">Нестареющий мрамор в новом воплощении.</span><span data-lang="en">Timeless marble, reimagined.</span></div><div class="service-price"><span data-lang="ru">по запросу</span><span data-lang="en">on request</span></div></div>
+        <div class="service-card"><div class="service-num">03</div><div class="service-name"><span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span></div><div class="service-desc"><span data-lang="ru">Естественная текстура, изысканный вид.</span><span data-lang="en">Raw texture, refined feel.</span></div><div class="service-price"><span data-lang="ru">от 20 000 ₽</span><span data-lang="en">from €200</span></div></div>
+        <div class="service-card"><div class="service-num">04</div><div class="service-name"><span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span></div><div class="service-desc"><span data-lang="ru">Свет, текстура и ощущение ткани на ваших стенах.</span><span data-lang="en">Light, texture, and movement on your walls.</span></div><div class="service-price"><span data-lang="ru">от 25 000 ₽</span><span data-lang="en">from €250</span></div></div>
+        <div class="service-card"><div class="service-num">05</div><div class="service-name"><span data-lang="ru">Трафареты и авторский декор</span><span data-lang="en">Stencils and Custom Designs</span></div><div class="service-desc"><span data-lang="ru">Изысканные узоры или яркие акцентные элементы.</span><span data-lang="en">Elegant patterns or bold accent pieces.</span></div><div class="service-price"><span data-lang="ru">от 5 000 ₽</span><span data-lang="en">from €50</span></div></div>
+        <div class="service-card"><div class="service-num">06</div><div class="service-name"><span data-lang="ru">Травертин и марморин</span><span data-lang="en">Travertine and Marmorine</span></div><div class="service-desc"><span data-lang="ru">Естественная текстура, неподвластная времени.</span><span data-lang="en">Natural texture, timeless elegance.</span></div><div class="service-price"><span data-lang="ru">индивидуально</span><span data-lang="en">custom quote</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="section-inner">
+      <div class="section-eyebrow"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></div>
+      <h2 class="section-title"><span data-lang="ru">Реализованные <em>проекты</em></span><span data-lang="en">Completed <em>Projects</em></span></h2>
+      <div class="portfolio-filter">
+        <button class="filter-btn active"><span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span></button>
+        <button class="filter-btn"><span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span></button>
+        <button class="filter-btn"><span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span></button>
+        <button class="filter-btn"><span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span></button>
+        <button class="filter-btn"><span data-lang="ru">Трафареты и авторский декор</span><span data-lang="en">Stencils and Custom Designs</span></button>
+        <button class="filter-btn"><span data-lang="ru">Травертин и марморин</span><span data-lang="en">Travertine and Marmorine</span></button>
+      </div>
+      <div class="portfolio-grid">
+
+        <div class="portfolio-item wide" onclick="openLightbox(0)">
+          <img class="cover" src="images-Bas/1.JPEG" alt="Bas-relief">
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-title"><span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span></div>
+            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" onclick="openLightbox(1)">
+          <img class="cover" src="images-Marbre/11.jpg" alt="Marbre">
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-title"><span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span></div>
+            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" onclick="openLightbox(2)">
+          <img class="cover" src="images-Concrete/27.JPEG" alt="Béton">
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-title"><span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span></div>
+            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" onclick="openLightbox(3)">
+          <img class="cover" src="images-Paints/18.JPEG" alt="Peintures">
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-title"><span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span></div>
+            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" onclick="openLightbox(4)">
+          <img class="cover" src="images-Stencils/36.JPEG" alt="Stencils">
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-title"><span data-lang="ru">Трафареты и авторский декор</span><span data-lang="en">Stencils and Custom Designs</span></div>
+            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" onclick="openLightbox(5)">
+          <img class="cover" src="images-Travertine/42.JPEG" alt="Travertin">
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-title"><span data-lang="ru">Травертин и марморин</span><span data-lang="en">Travertine and Marmorine</span></div>
+            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,10,20,0.97); flex-direction:column; align-items:center; justify-content:center;">
+    <div style="position:absolute; top:1.5rem; right:2rem; display:flex; gap:1rem; align-items:center;">
+      <div id="lb-counter" style="font-family:'Montserrat',sans-serif; font-size:.75rem; color:rgba(197,160,80,.6); letter-spacing:.1em;"></div>
+      <button onclick="closeLightbox()" style="background:none; border:1px solid rgba(197,160,80,.4); color:#c5a050; width:38px; height:38px; border-radius:50%; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+    </div>
+    <div id="lb-title" style="font-family:'Cinzel',serif; font-size:.85rem; letter-spacing:.2em; color:rgba(197,160,80,.7); margin-bottom:1.5rem; text-transform:uppercase;"></div>
+    <div style="position:relative; display:flex; align-items:center; gap:1rem; width:100%; max-width:1000px; padding:0 1rem; box-sizing:border-box;">
+      <button onclick="lbPrev()" id="lb-prev" style="background:none; border:1px solid rgba(197,160,80,.4); color:#c5a050; width:44px; height:44px; border-radius:50%; font-size:1.3rem; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center;">‹</button>
+      <div id="lb-media" style="flex:1; display:flex; align-items:center; justify-content:center; max-height:78vh; overflow:hidden; border-radius:4px;"></div>
+      <button onclick="lbNext()" id="lb-next" style="background:none; border:1px solid rgba(197,160,80,.4); color:#c5a050; width:44px; height:44px; border-radius:50%; font-size:1.3rem; cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center;">›</button>
+    </div>
+    <div id="lb-dots" style="display:flex; gap:.5rem; margin-top:1.5rem;"></div>
+  </div>
+
+  <section id="booking">
+    <div class="section-inner">
+      <div class="booking-layout">
+        <div class="booking-info">
+          <div class="section-eyebrow"><span data-lang="ru">Заказать</span><span data-lang="en">Book a Service</span></div>
+          <h2 class="section-title"><span data-lang="ru">Начните ваш <em>проект</em></span><span data-lang="en">Start your <em>project</em></span></h2>
+          <p><span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span><span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ αδιπισκινγ ελιτ.</span></p>
+          <div class="packages">
+            <div class="package"><div class="package-name"><span data-lang="ru">Консультация</span><span data-lang="en">Consultation</span></div><div class="package-price"><span data-lang="ru">5 000 ₽</span><span data-lang="en">€50</span></div><div class="package-desc"><span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ.</span><span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ.</span></div></div>
+            <div class="package featured"><div class="package-badge"><span data-lang="ru">Популярно</span><span data-lang="en">Popular</span></div><div class="package-name"><span data-lang="ru">Стандарт</span><span data-lang="en">Standard</span></div><div class="package-price"><span data-lang="ru">от 25 000 ₽</span><span data-lang="en">from €250</span></div><div class="package-desc"><span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ.</span><span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ.</span></div></div>
+            <div class="package"><div class="package-name"><span data-lang="ru">Под ключ — Люкс</span><span data-lang="en">Full Project — Luxury</span></div><div class="package-price"><span data-lang="ru">по запросу</span><span data-lang="en">on request</span></div><div class="package-desc"><span data-lang="ru">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ.</span><span data-lang="en">Λορεμ ιπσυμ δολορ σιτ αμετ κονσεκτετυρ.</span></div></div>
+          </div>
+        </div>
+        <div class="booking-form">
+          <div class="form-title"><span data-lang="ru">Оставить заявку</span><span data-lang="en">Send a Request</span></div>
+          <div class="form-row">
+            <div class="form-group"><label><span data-lang="ru">Имя</span><span data-lang="en">Name</span></label><input type="text" placeholder="Μαρια"></div>
+            <div class="form-group"><label><span data-lang="ru">Телефон</span><span data-lang="en">Phone</span></label><input type="tel" placeholder="+7 (___) ___-__-__"></div>
+          </div>
+          <div class="form-group"><label><span data-lang="ru">Email</span><span data-lang="en">Email</span></label><input type="email" placeholder="votre@email.com"></div>
+          <div class="form-group"><label><span data-lang="ru">Тип услуги</span><span data-lang="en">Service Type</span></label><select><option>Барельеф / Bas-relief</option><option>Дизайн под ключ / Full design</option><option>Ванная / Bathroom</option><option>Консультация / Consultation</option></select></div>
+          <div class="form-group"><label><span data-lang="ru">Сообщение</span><span data-lang="en">Message</span></label><textarea placeholder="Λορεμ ιπσυμ..."></textarea></div>
+          <button class="form-submit"><span data-lang="ru">Отправить заявку →</span><span data-lang="en">Send Request →</span></button>
+          <div class="payment-icons"><span><span data-lang="ru">Оплата:</span><span data-lang="en">Payment:</span></span><span>VISA</span><span>MC</span><span>SWIFT</span><span>PayPal</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-eyebrow"><span data-lang="ru">Контакты</span><span data-lang="en">Contact</span></div>
+      <h2 class="section-title"><span data-lang="ru">Свяжитесь <em>со мной</em></span><span data-lang="en">Get in <em>touch</em></span></h2>
+      <div class="contact-layout">
+        <div>
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c-4.418-4.418-7-8.134-7-11a7 7 0 1 1 14 0c0 2.866-2.582 6.582-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+            <div><div class="contact-detail-label"><span data-lang="ru">Города</span><span data-lang="en">Cities</span></div><div class="contact-detail-value">Донецк / Тбилиси</div></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5L2.5 10l7.5 2.5M21.5 4.5L14 21.5l-4-9M21.5 4.5L10 12.5"/></svg></div>
+            <div><div class="contact-detail-label">Telegram</div><div class="contact-detail-value"><a href="https://t.me/irisart24" style="color:var(--gold-light);text-decoration:none">t.me/irisart24</a></div></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+            <div><div class="contact-detail-label">Instagram</div><div class="contact-detail-value"><a href="https://instagram.com/irisart24" style="color:var(--gold-light);text-decoration:none">@irisart24</a></div></div>
+          </div>
+        </div>
+        <div><div id="interactiveMap" style="height:350px;width:100%;border-radius:8px;border:1px solid var(--border);overflow:hidden;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">IrisArt</div>
+    <div class="footer-copy">© 2024 IrisArt. <span data-lang="ru">Все права защищены.</span><span data-lang="en">All rights reserved.</span></div>
+    <div class="footer-links">
+      <a href="#about"><span data-lang="ru">О нас</span><span data-lang="en">About</span></a>
+      <a href="#services"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></a>
+      <a href="#portfolio"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></a>
+      <a href="#booking"><span data-lang="ru">Заказать</span><span data-lang="en">Book</span></a>
+    </div>
+  </footer>
+
+  <script>
+    // ✅ Toutes les données ici, dans le script principal en bas
+    portfolioData[0] = { titleRu: "Барельефы и декоративное пано", titleEn: "Bas-relief and decorative painting", medias: [
+      {type:"image",src:"images-Bas/1.JPEG"},{type:"image",src:"images-Bas/2.jpg"},{type:"image",src:"images-Bas/3.JPEG"},
+      {type:"image",src:"images-Bas/4.JPEG"},{type:"image",src:"images-Bas/5.JPEG"},{type:"image",src:"images-Bas/6.JPEG"},
+      {type:"image",src:"images-Bas/7.JPEG"},{type:"image",src:"images-Bas/8.JPEG"},{type:"image",src:"images-Bas/9.JPG"},
+      {type:"image",src:"images-Bas/10.JPG"}
+    ]};
+    portfolioData[1] = { titleRu: "Мрамор", titleEn: "Marble", medias: [
+      {type:"image",src:"images-Marbre/11.jpg"},{type:"image",src:"images-Marbre/12.jpg"},{type:"image",src:"images-Marbre/13.jpg"},
+      {type:"image",src:"images-Marbre/14.jpg"},{type:"image",src:"images-Marbre/15.jpg"},{type:"image",src:"images-Marbre/16.jpg"},
+      {type:"image",src:"images-Marbre/17.jpg"}
+    ]};
+    portfolioData[2] = { titleRu: "Декоративный бетон", titleEn: "Decorative Concrete", medias: [
+      {type:"image",src:"images-Concrete/27.JPEG"},{type:"image",src:"images-Concrete/28.JPEG"},{type:"image",src:"images-Concrete/29.JPEG"},
+      {type:"image",src:"images-Concrete/30.jpg"},{type:"image",src:"images-Concrete/31.jpg"},{type:"image",src:"images-Concrete/32.jpg"},
+      {type:"image",src:"images-Concrete/33.jpg"},{type:"image",src:"images-Concrete/34.jpg"},{type:"image",src:"images-Concrete/35.jpg"}
+    ]};
+    portfolioData[3] = { titleRu: "Декоративные краски", titleEn: "Decorative Paints", medias: [
+      {type:"image",src:"images-Paints/18.JPEG"},{type:"image",src:"images-Paints/19.JPEG"},{type:"image",src:"images-Paints/20.JPEG"},
+      {type:"image",src:"images-Paints/21.JPEG"},{type:"image",src:"images-Paints/22.JPEG"},{type:"image",src:"images-Paints/23.JPEG"},
+      {type:"image",src:"images-Paints/24.JPEG"},{type:"image",src:"images-Paints/25.JPEG"},{type:"image",src:"images-Paints/26.jpg"}
+    ]};
+    portfolioData[4] = { titleRu: "Трафареты и авторский декор", titleEn: "Stencils and Custom Designs", medias: [
+      {type:"image",src:"images-Stencils/36.JPEG"},{type:"image",src:"images-Stencils/37.jpg"},{type:"image",src:"images-Stencils/38.jpg"},
+      {type:"image",src:"images-Stencils/39.jpg"},{type:"image",src:"images-Stencils/40.jpg"},{type:"image",src:"images-Stencils/41.jpg"}
+    ]};
+    portfolioData[5] = { titleRu: "Травертин и марморин", titleEn: "Travertine and Marmorine", medias: [
+      {type:"image",src:"images-Travertine/42.JPEG"},{type:"image",src:"images-Travertine/43.JPEG"},{type:"image",src:"images-Travertine/44.JPEG"},
+      {type:"image",src:"images-Travertine/45.JPEG"},{type:"image",src:"images-Travertine/46.JPEG"},{type:"image",src:"images-Travertine/47.JPEG"},
+      {type:"image",src:"images-Travertine/48.JPEG"},{type:"image",src:"images-Travertine/49.JPEG"},{type:"image",src:"images-Travertine/50.JPEG"},
+      {type:"image",src:"images-Travertine/51.JPEG"},{type:"image",src:"images-Travertine/52.JPEG"},{type:"image",src:"images-Travertine/53.jpg"},
+      {type:"image",src:"images-Travertine/54.jpg"},{type:"image",src:"images-Travertine/55.jpg"},{type:"image",src:"images-Travertine/56.jpg"},
+      {type:"image",src:"images-Travertine/57.jpg"},{type:"image",src:"images-Travertine/58.jpg"}
+    ]};
+
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burgerBtn.addEventListener('click', () => { burgerBtn.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
+    function closeMobileMenu() { burgerBtn.classList.remove('open'); mobileMenu.classList.remove('open'); }
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.padding = window.scrollY > 80 ? '.7rem 2.5rem' : '1.1rem 2.5rem';
+    });
+
+    function setLang(lang) {
+      document.body.classList.toggle('lang-en', lang === 'en');
+      document.body.classList.toggle('lang-ru', lang === 'ru');
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', (lang === 'ru' && b.title === 'Русский') || (lang === 'en' && b.title === 'English'));
+      });
+      localStorage.setItem('irisart-lang', lang);
+    }
+    (function() { setLang(localStorage.getItem('irisart-lang') || 'ru'); })();
+
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target), suffix = el.dataset.suffix || '';
+      let step = 0; const steps = 60;
+      const tick = setInterval(() => {
+        step++;
+        const current = Math.round((1 - Math.pow(1 - step/steps, 3)) * target);
+        el.textContent = current.toLocaleString('fr-FR').replace(/\s/g,'\u202f') + suffix;
+        if (step % 3 === 0) { el.classList.remove('popping'); void el.offsetWidth; el.classList.add('popping'); }
+        if (step >= steps) { clearInterval(tick); el.textContent = target.toLocaleString('fr-FR').replace(/\s/g,'\u202f') + suffix; }
+      }, 1800/steps);
+    }
+    const statsObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { document.querySelectorAll('.stat-num[data-target]').forEach(animateCounter); statsObs.disconnect(); }});
+    }, {threshold:.3});
+    const hs = document.querySelector('.hero-stats'); if (hs) statsObs.observe(hs);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+    }));
+    document.querySelectorAll('.package').forEach(pkg => pkg.addEventListener('click', () => {
+      document.querySelectorAll('.package').forEach(p => p.style.borderColor = ''); pkg.style.borderColor = 'var(--gold)';
+    }));
+
+    function initInteractiveMap() {
+      const map = L.map('interactiveMap').setView([45,41],6);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OSM &copy; CartoDB',subdomains:'abcd',maxZoom:19}).addTo(map);
+      const m1 = L.marker([48.0151,37.8028]).addTo(map); m1.bindPopup("<b>Donetsk</b><br>Atelier & Showroom").openPopup();
+      const m2 = L.marker([41.7151,44.8271]).addTo(map); m2.bindPopup("<b>Tbilissi</b><br>Bureau de design");
+      map.fitBounds(L.featureGroup([m1,m2]).getBounds().pad(0.2));
+    }
+
+    // LIGHTBOX
+    var lbIndex = 0, lbMedia = 0;
+    function openLightbox(i) {
+      lbIndex = i; lbMedia = 0;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      renderLightbox();
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+      document.querySelectorAll('#lb-media video').forEach(v => v.pause());
+    }
+    function renderLightbox() {
+      const data = portfolioData[lbIndex];
+      const lang = document.body.classList.contains('lang-en') ? 'en' : 'ru';
+      document.getElementById('lb-title').textContent = lang === 'en' ? data.titleEn : data.titleRu;
+      const mediaBox = document.getElementById('lb-media');
+      const dotsBox = document.getElementById('lb-dots');
+      const counter = document.getElementById('lb-counter');
+      mediaBox.innerHTML = ''; dotsBox.innerHTML = '';
+      const total = data.medias.length;
+      document.getElementById('lb-prev').style.visibility = total > 1 ? 'visible' : 'hidden';
+      document.getElementById('lb-next').style.visibility = total > 1 ? 'visible' : 'hidden';
+      counter.textContent = (lbMedia+1) + ' / ' + total;
+      const m = data.medias[lbMedia];
+      if (m.type === 'video') {
+        const v = document.createElement('video'); v.src = m.src; v.controls = true; v.autoplay = true; mediaBox.appendChild(v);
+      } else {
+        const img = document.createElement('img'); img.src = m.src; mediaBox.appendChild(img);
+      }
+      data.medias.forEach((_,i) => {
+        const dot = document.createElement('div');
+        dot.className = 'lb-dot' + (i===lbMedia?' active':'');
+        dot.onclick = () => { lbMedia=i; renderLightbox(); };
+        dotsBox.appendChild(dot);
+      });
+    }
+    function lbNext() { lbMedia=(lbMedia+1)%portfolioData[lbIndex].medias.length; renderLightbox(); }
+    function lbPrev() { const t=portfolioData[lbIndex].medias.length; lbMedia=(lbMedia-1+t)%t; renderLightbox(); }
+    document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+    document.getElementById('lightbox').addEventListener('click', function(e) { if(e.target===this) closeLightbox(); });
+
+    if (!document.querySelector('#leaflet-css')) {
+      const link = document.createElement('link'); link.id='leaflet-css'; link.rel='stylesheet';
+      link.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'; document.head.appendChild(link);
+      const script = document.createElement('script');
+      script.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'; script.onload=initInteractiveMap;
+      document.body.appendChild(script);
+    } else { initInteractiveMap(); }
+  </script>
+</body>
+</html>
