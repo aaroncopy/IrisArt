@@ -84,7 +84,7 @@
             <span data-lang="ru">Отели, рестораны, квартиры и дома. Я сопровождаю вас от идеи до полной реализации проекта. Превратите свою обычную квартиру в интерьер, словно сошедший со страниц дизайнерского журнала! Посмотрите мои работы прямо здесь.</span>
             <span data-lang="en">Hotels, restaurants, apartments, and homes. I'll guide you from the initial concept through to the project's completion. Transform your ordinary apartment into an interior straight out of a design magazine! Discover my work right below.</span>
           </p>
-          <div class="about-signature">Irina A.</div>
+          <div class="about-signature">Irina K.</div>
           <div class="ornament" style="margin-top:2rem;margin-bottom:0"><div class="ornament-diamond"></div></div>
         </div>
       </div>
@@ -106,69 +106,38 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════════
+       PORTFOLIO — galerie filtrée par catégorie
+  ════════════════════════════════════════════════ -->
   <section id="portfolio">
     <div class="section-inner">
       <div class="section-eyebrow"><span data-lang="ru">Портфолио</span><span data-lang="en">Portfolio</span></div>
       <h2 class="section-title"><span data-lang="ru">Реализованные <em>проекты</em></span><span data-lang="en">Completed <em>Projects</em></span></h2>
+
       <div class="portfolio-filter">
-        <button class="filter-btn active"><span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span></button>
-        <button class="filter-btn"><span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span></button>
-        <button class="filter-btn"><span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span></button>
-        <button class="filter-btn"><span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span></button>
-        <button class="filter-btn"><span data-lang="ru">Трафареты и авторский декор</span><span data-lang="en">Stencils and Custom Designs</span></button>
-        <button class="filter-btn"><span data-lang="ru">Травертин и марморин</span><span data-lang="en">Travertine and Marmorine</span></button>
+        <button class="filter-btn active" onclick="showCategory(0)">
+          <span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span>
+        </button>
+        <button class="filter-btn" onclick="showCategory(1)">
+          <span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span>
+        </button>
+        <button class="filter-btn" onclick="showCategory(2)">
+          <span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span>
+        </button>
+        <button class="filter-btn" onclick="showCategory(3)">
+          <span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span>
+        </button>
+        <button class="filter-btn" onclick="showCategory(4)">
+          <span data-lang="ru">Трафареты и авторский декор</span><span data-lang="en">Stencils and Custom Designs</span>
+        </button>
+        <button class="filter-btn" onclick="showCategory(5)">
+          <span data-lang="ru">Травертин и марморин</span><span data-lang="en">Travertine and Marmorine</span>
+        </button>
       </div>
-      <div class="portfolio-grid">
 
-        <div class="portfolio-item wide" onclick="openLightbox(0)">
-          <img class="cover" src="images-Bas/1.JPEG" alt="Bas-relief">
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-title"><span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span></div>
-            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
-          </div>
-        </div>
+      <!-- Galerie générée dynamiquement -->
+      <div class="portfolio-gallery-grid" id="portfolioGallery"></div>
 
-        <div class="portfolio-item" onclick="openLightbox(1)">
-          <img class="cover" src="images-Marbre/11.jpg" alt="Marbre">
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-title"><span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span></div>
-            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
-          </div>
-        </div>
-
-        <div class="portfolio-item" onclick="openLightbox(2)">
-          <img class="cover" src="images-Concrete/27.JPEG" alt="Béton">
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-title"><span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span></div>
-            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
-          </div>
-        </div>
-
-        <div class="portfolio-item" onclick="openLightbox(3)">
-          <img class="cover" src="images-Paints/18.JPEG" alt="Peintures">
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-title"><span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span></div>
-            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
-          </div>
-        </div>
-
-        <div class="portfolio-item" onclick="openLightbox(4)">
-          <img class="cover" src="images-Stencils/36.JPEG" alt="Stencils">
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-title"><span data-lang="ru">Трафареты и авторский декор</span><span data-lang="en">Stencils and Custom Designs</span></div>
-            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
-          </div>
-        </div>
-
-        <div class="portfolio-item" onclick="openLightbox(5)">
-          <img class="cover" src="images-Travertine/42.JPEG" alt="Travertin">
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-title"><span data-lang="ru">Травертин и марморин</span><span data-lang="en">Travertine and Marmorine</span></div>
-            <div class="portfolio-overlay-hint"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><span data-lang="ru">Смотреть</span><span data-lang="en">View</span></div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -224,7 +193,7 @@
   </footer>
 
   <script>
-    // ✅ Toutes les données ici, dans le script principal en bas
+    // ── DONNÉES PORTFOLIO ──
     portfolioData[0] = { titleRu: "Барельефы и декоративное пано", titleEn: "Bas-relief and decorative painting", medias: [
       {type:"image",src:"images-Bas/1.JPEG"},{type:"image",src:"images-Bas/2.jpg"},{type:"image",src:"images-Bas/3.JPEG"},
       {type:"image",src:"images-Bas/4.JPEG"},{type:"image",src:"images-Bas/5.JPEG"},{type:"image",src:"images-Bas/6.JPEG"},
@@ -259,6 +228,7 @@
       {type:"image",src:"images-Travertine/57.jpg"},{type:"image",src:"images-Travertine/58.jpg"}
     ]};
 
+    // ── NAV ──
     const burgerBtn = document.getElementById('burgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     burgerBtn.addEventListener('click', () => { burgerBtn.classList.toggle('open'); mobileMenu.classList.toggle('open'); });
@@ -268,6 +238,7 @@
       document.querySelector('nav').style.padding = window.scrollY > 80 ? '.7rem 2.5rem' : '1.1rem 2.5rem';
     });
 
+    // ── LANGUE ──
     function setLang(lang) {
       document.body.classList.toggle('lang-en', lang === 'en');
       document.body.classList.toggle('lang-ru', lang === 'ru');
@@ -278,6 +249,7 @@
     }
     (function() { setLang(localStorage.getItem('irisart-lang') || 'ru'); })();
 
+    // ── COMPTEURS ──
     function animateCounter(el) {
       const target = parseInt(el.dataset.target), suffix = el.dataset.suffix || '';
       let step = 0; const steps = 60;
@@ -294,13 +266,12 @@
     }, {threshold:.3});
     const hs = document.querySelector('.hero-stats'); if (hs) statsObs.observe(hs);
 
-    document.querySelectorAll('.filter-btn').forEach(btn => btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
-    }));
+    // ── PACKAGES ──
     document.querySelectorAll('.package').forEach(pkg => pkg.addEventListener('click', () => {
       document.querySelectorAll('.package').forEach(p => p.style.borderColor = ''); pkg.style.borderColor = 'var(--gold)';
     }));
 
+    // ── CARTE ──
     function initInteractiveMap() {
       const map = L.map('interactiveMap').setView([45,41],6);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'&copy; OSM &copy; CartoDB',subdomains:'abcd',maxZoom:19}).addTo(map);
@@ -309,7 +280,55 @@
       map.fitBounds(L.featureGroup([m1,m2]).getBounds().pad(0.2));
     }
 
-    // LIGHTBOX
+    // ── GALERIE PORTFOLIO ──
+    function showCategory(i) {
+      document.querySelectorAll('.filter-btn').forEach((b, idx) => {
+        b.classList.toggle('active', idx === i);
+      });
+
+      const data = portfolioData[i];
+      const gallery = document.getElementById('portfolioGallery');
+
+      gallery.style.opacity = '0';
+      gallery.style.transform = 'translateY(12px)';
+
+      setTimeout(() => {
+        gallery.innerHTML = '';
+        data.medias.forEach((m, idx) => {
+          const item = document.createElement('div');
+          item.className = 'gallery-thumb';
+          item.style.animationDelay = (idx * 0.04) + 's';
+          item.onclick = () => { lbIndex = i; lbMedia = idx; openLightboxDirect(); };
+
+          const img = document.createElement('img');
+          img.src = m.src;
+          img.alt = data.titleEn;
+          img.loading = 'lazy';
+
+          const overlay = document.createElement('div');
+          overlay.className = 'gallery-thumb-overlay';
+          overlay.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>';
+
+          item.appendChild(img);
+          item.appendChild(overlay);
+          gallery.appendChild(item);
+        });
+
+        gallery.style.transition = 'opacity .35s ease, transform .35s ease';
+        gallery.style.opacity = '1';
+        gallery.style.transform = 'translateY(0)';
+      }, 180);
+    }
+
+    function openLightboxDirect() {
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      renderLightbox();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => { showCategory(0); });
+
+    // ── LIGHTBOX ──
     var lbIndex = 0, lbMedia = 0;
     function openLightbox(i) {
       lbIndex = i; lbMedia = 0;
