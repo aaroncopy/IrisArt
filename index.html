@@ -96,9 +96,7 @@
       <div class="section-eyebrow"><span data-lang="ru">Услуги</span><span data-lang="en">Services</span></div>
       <h2 class="section-title"><span data-lang="ru">Что я <em>создаю</em></span><span data-lang="en">What I <em>create</em></span></h2>
       <div class="services-grid">
-        <!-- 01 : prix visible -->
         <div class="service-card"><div class="service-num">01</div><div class="service-name"><span data-lang="ru">Барельефы и декоративное пано</span><span data-lang="en">Bas-relief and decorative painting</span></div><div class="service-desc"><span data-lang="ru">Больше, чем просто украшение — скульптурная глубина, которая превращает ваши стены в центральный элемент интерьера.</span><span data-lang="en">More than decoration — sculpted depth that transforms your walls into a focal point.</span></div><div class="service-price"><span data-lang="ru">от 15 000 ₽ / м²</span><span data-lang="en">from €150 / m²</span></div></div>
-        <!-- 02–06 : prix masqués -->
         <div class="service-card"><div class="service-num">02</div><div class="service-name"><span data-lang="ru">Мрамор</span><span data-lang="en">Marble</span></div><div class="service-desc"><span data-lang="ru">Нестареющий мрамор в новом воплощении.</span><span data-lang="en">Timeless marble, reimagined.</span></div><div class="service-price" style="display:none"><span data-lang="ru">по запросу</span><span data-lang="en">on request</span></div></div>
         <div class="service-card"><div class="service-num">03</div><div class="service-name"><span data-lang="ru">Декоративный бетон</span><span data-lang="en">Decorative Concrete</span></div><div class="service-desc"><span data-lang="ru">Естественная текстура, изысканный вид.</span><span data-lang="en">Raw texture, refined feel.</span></div><div class="service-price" style="display:none"><span data-lang="ru">от 20 000 ₽</span><span data-lang="en">from €200</span></div></div>
         <div class="service-card"><div class="service-num">04</div><div class="service-name"><span data-lang="ru">Декоративные краски</span><span data-lang="en">Decorative Paints</span></div><div class="service-desc"><span data-lang="ru">Свет, текстура и ощущение ткани на ваших стенах.</span><span data-lang="en">Light, texture, and movement on your walls.</span></div><div class="service-price" style="display:none"><span data-lang="ru">от 25 000 ₽</span><span data-lang="en">from €250</span></div></div>
@@ -190,38 +188,48 @@
   </footer>
 
   <script>
+    // ── CATEGORY 0 : Bas-relief ── ajout de 59–65
     portfolioData[0] = { titleRu: "Барельефы и декоративное пано", titleEn: "Bas-relief and decorative painting", medias: [
       {type:"image",src:"images-Bas/1.JPEG"},{type:"image",src:"images-Bas/2.jpg"},{type:"image",src:"images-Bas/3.JPEG"},
       {type:"image",src:"images-Bas/4.JPEG"},{type:"image",src:"images-Bas/5.JPEG"},{type:"image",src:"images-Bas/6.JPEG"},
       {type:"image",src:"images-Bas/7.JPEG"},{type:"image",src:"images-Bas/8.JPEG"},{type:"image",src:"images-Bas/9.JPG"},
-      {type:"image",src:"images-Bas/10.JPG"}
+      {type:"image",src:"images-Bas/10.JPG"},{type:"image",src:"images-Bas/59.JPEG"},{type:"image",src:"images-Bas/60.JPEG"},
+      {type:"image",src:"images-Bas/61.jpg"},{type:"image",src:"images-Bas/62.jpg"},{type:"image",src:"images-Bas/63.jpg"},
+      {type:"image",src:"images-Bas/64.jpg"},{type:"image",src:"images-Bas/65.jpg"}
     ]};
+
+    // ── CATEGORY 1 : Marble ── retrait de 14.jpg et 15.jpg
     portfolioData[1] = { titleRu: "Мрамор", titleEn: "Marble", medias: [
       {type:"image",src:"images-Marbre/11.jpg"},{type:"image",src:"images-Marbre/12.jpg"},{type:"image",src:"images-Marbre/13.jpg"},
-      {type:"image",src:"images-Marbre/14.jpg"},{type:"image",src:"images-Marbre/15.jpg"},{type:"image",src:"images-Marbre/16.jpg"},
-      {type:"image",src:"images-Marbre/17.jpg"}
+      {type:"image",src:"images-Marbre/16.jpg"},{type:"image",src:"images-Marbre/17.jpg"}
     ]};
+
     portfolioData[2] = { titleRu: "Декоративный бетон", titleEn: "Decorative Concrete", medias: [
       {type:"image",src:"images-Concrete/27.JPEG"},{type:"image",src:"images-Concrete/28.JPEG"},{type:"image",src:"images-Concrete/29.JPEG"},
       {type:"image",src:"images-Concrete/30.jpg"},{type:"image",src:"images-Concrete/31.jpg"},{type:"image",src:"images-Concrete/32.jpg"},
       {type:"image",src:"images-Concrete/33.jpg"},{type:"image",src:"images-Concrete/34.jpg"},{type:"image",src:"images-Concrete/35.jpg"}
     ]};
+
     portfolioData[3] = { titleRu: "Декоративные краски", titleEn: "Decorative Paints", medias: [
       {type:"image",src:"images-Paints/18.JPEG"},{type:"image",src:"images-Paints/19.JPEG"},{type:"image",src:"images-Paints/20.JPEG"},
       {type:"image",src:"images-Paints/21.JPEG"},{type:"image",src:"images-Paints/22.JPEG"},{type:"image",src:"images-Paints/23.JPEG"},
       {type:"image",src:"images-Paints/24.JPEG"},{type:"image",src:"images-Paints/25.JPEG"},{type:"image",src:"images-Paints/26.jpg"}
     ]};
+
     portfolioData[4] = { titleRu: "Трафареты и авторский декор", titleEn: "Stencils and Custom Designs", medias: [
       {type:"image",src:"images-Stencils/36.JPEG"},{type:"image",src:"images-Stencils/37.jpg"},{type:"image",src:"images-Stencils/38.jpg"},
       {type:"image",src:"images-Stencils/39.jpg"},{type:"image",src:"images-Stencils/40.jpg"},{type:"image",src:"images-Stencils/41.jpg"}
     ]};
+
+    // ── CATEGORY 5 : Travertine ── suppression de 47.jpg + ajout de 14.jpg et 15.jpg (depuis images-Marbre)
     portfolioData[5] = { titleRu: "Травертин и марморин", titleEn: "Travertine and Marmorine", medias: [
       {type:"image",src:"images-Travertine/42.JPEG"},{type:"image",src:"images-Travertine/43.JPEG"},{type:"image",src:"images-Travertine/44.JPEG"},
-      {type:"image",src:"images-Travertine/45.JPEG"},{type:"image",src:"images-Travertine/46.JPEG"},{type:"image",src:"images-Travertine/47.JPEG"},
+      {type:"image",src:"images-Travertine/45.JPEG"},{type:"image",src:"images-Travertine/46.JPEG"},
       {type:"image",src:"images-Travertine/48.JPEG"},{type:"image",src:"images-Travertine/49.JPEG"},{type:"image",src:"images-Travertine/50.JPEG"},
       {type:"image",src:"images-Travertine/51.JPEG"},{type:"image",src:"images-Travertine/52.JPEG"},{type:"image",src:"images-Travertine/53.jpg"},
       {type:"image",src:"images-Travertine/54.jpg"},{type:"image",src:"images-Travertine/55.jpg"},{type:"image",src:"images-Travertine/56.jpg"},
-      {type:"image",src:"images-Travertine/57.jpg"},{type:"image",src:"images-Travertine/58.jpg"}
+      {type:"image",src:"images-Travertine/57.jpg"},{type:"image",src:"images-Travertine/58.jpg"},
+      {type:"image",src:"images-Marbre/14.jpg"},{type:"image",src:"images-Marbre/15.jpg"}
     ]};
 
     const burgerBtn = document.getElementById('burgerBtn');
